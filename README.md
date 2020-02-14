@@ -231,11 +231,6 @@ Breakpoints shortcuts to use in image size property, can be overwridden.
 Original image hosted on your web server. You can use absolute path or
 relative to baseURL in your config.
 
-**NOTES:**
-
-The plugin uses a special algorithm to detect the width of image container and set the image size accordingly.
-This is the recommended way of using the Cloudimage Responsive plugin.
-
 ### sizes
 
 ###### Type: **Object** | Default: **undefined**
