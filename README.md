@@ -23,7 +23,7 @@
 
 <p align="center">
 	<strong>
-		<a href="#table_of_contents">Docs</a>
+		<a href="#table-of-contents">Docs</a>
 		•
 		<a href="https://scaleflex.github.io/react-cloudimage-responsive-plain/" target="_blank">Demo</a>
 		•
