@@ -134,7 +134,7 @@ render(<App />, document.body);
 <Img src="img.jpg" alt="Demo image"/>
 ```
 
-<a href="https://codesandbox.io/s/1840nl707j"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="edeit in codesandbox"/></a>
+<a href="https://codesandbox.io/s/react-cloudimage-responsive-plain-example-clgjj"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="edeit in codesandbox"/></a>
 
 ### BackgroundImg component:
 
