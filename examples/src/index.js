@@ -64,7 +64,7 @@ class App extends Component {
                 target="_blank"
               >View on GitHub</a>
               <a
-                href="https://codesandbox.io/s/1840nl707j"
+                href="https://codesandbox.io/s/react-cloudimage-responsive-plain-example-clgjj"
                 style={{ marginLeft: 5 }}
                 className="btn btn-light"
                 target="_blank"
@@ -89,7 +89,7 @@ class App extends Component {
 
         <section className="container-box-wrapper" style={{ margin: 0 }}>
           <ContainerBox/>
-          <Img src={images[0].src} ratio={images[0].ratio}/>
+          <Img src={images[0].src}/>
         </section>
 
         <div style={{ background: '#fff' }}>
@@ -260,7 +260,7 @@ class App extends Component {
               <div className="col-12">
                 <div className="container-box-wrapper">
                   <ContainerBox/>
-                  <Img src={images[8].src} ratio={images[8].ratio}/>
+                  <Img src={images[8].src}/>
                 </div>
               </div>
 
@@ -268,7 +268,7 @@ class App extends Component {
                 <div key={index} className="col-6">
                   <div className="container-box-wrapper">
                     <ContainerBox/>
-                    <Img src={image.src} ratio={image.ratio}/>
+                    <Img src={image.src}/>
                     original: <i>{image.original_size}</i> <a
                     href={`https://cloudimage.public.airstore.io/demo/${image.src}`}
                     target="_blank">link</a><br/>
@@ -443,7 +443,7 @@ const App = () => {
   return (
     <CloudimageProvider config={cloudimageConfig}>
       <h1>Simple demo of react-cloudimage-responsive-plain</h1>
-      <Img src="img.jpg" alt="Demo image" ratio={1.5}/>
+      <Img src="img.jpg" alt="Demo image"/>
     </CloudimageProvider>
   );
 };
@@ -460,13 +460,8 @@ render(<App />, document.body);`}</SyntaxHighlighter>
                   Implement it, just using the Img component:
                 </p>
                 <SyntaxHighlighter language='jsx' style={darcula}>
-                  {`<Img src="img.jpg" alt="Demo image" ratio={1.5}/>`}
+                  {`<Img src="img.jpg" alt="Demo image" />`}
                 </SyntaxHighlighter>
-                <p>
-                  <small>NOTE: "ratio" is recommended to prevent page layout jumping.{' '}
-                    The parameter is used to calculate image height to hold the image position while image is loading.
-                  </small>
-                </p>
               </div>
 
               <div className="action-wrapper forth-action">
