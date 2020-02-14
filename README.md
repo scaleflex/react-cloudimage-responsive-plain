@@ -27,7 +27,7 @@
 		•
 		<a href="https://scaleflex.github.io/react-cloudimage-responsive-plain/" target="_blank">Demo</a>
 		•
-		<a href="https://codesandbox.io/s/1840nl707j" target="_blank">Code Sandbox</a>
+		<a href="https://codesandbox.io/s/react-cloudimage-responsive-plain-example-clgjj" target="_blank">Code Sandbox</a>
 		•
 		<a href="https://medium.com/@dmitry_82269/responsive-images-in-2019-now-easier-than-ever-b76e5a43c074" target="_blank">Why?</a>
 	</strong>
