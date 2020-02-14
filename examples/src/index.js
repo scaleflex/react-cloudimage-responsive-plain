@@ -25,22 +25,22 @@ class App extends Component {
           <div className="container">
             <a
               className="logo"
-              href="https://scaleflex.github.io/react-cloudimage-responsive/">
+              href="https://scaleflex.github.io/react-cloudimage-responsive-plain/">
               React Cloudimage Responsive
             </a>
             <div className="reference-buttons">
               <a className="github-button" target="_blank"
-                 href="https://github.com/Scaleflex/react-cloudimage-responsive/subscription" data-icon="octicon-eye"
-                 aria-label="Watch Scaleflex/react-cloudimage-responsive on GitHub">Watch</a>
+                 href="https://github.com/Scaleflex/react-cloudimage-responsive-plain/subscription" data-icon="octicon-eye"
+                 aria-label="Watch Scaleflex/react-cloudimage-responsive-plain on GitHub">Watch</a>
               <a className="github-button" target="_blank"
-                 href="https://github.com/Scaleflex/react-cloudimage-responsive"
-                 data-icon="octicon-star" aria-label="Star Scaleflex/react-cloudimage-responsive on GitHub">Star</a>
+                 href="https://github.com/Scaleflex/react-cloudimage-responsive-plain"
+                 data-icon="octicon-star" aria-label="Star Scaleflex/react-cloudimage-responsive-plain on GitHub">Star</a>
               <a className="github-button" target="_blank"
-                 href="https://github.com/Scaleflex/react-cloudimage-responsive/fork"
+                 href="https://github.com/Scaleflex/react-cloudimage-responsive-plain/fork"
                  data-icon="octicon-repo-forked"
-                 aria-label="Fork Scaleflex/react-cloudimage-responsive on GitHub">Fork</a>
+                 aria-label="Fork Scaleflex/react-cloudimage-responsive-plain on GitHub">Fork</a>
               <a className="twitter-share-button btn btn-info" target="_blank"
-                 href="https://twitter.com/intent/tweet?text=Responsive%20images,%20now%20easier%20than%20ever&url=https://scaleflex.github.io/react-cloudimage-responsive/&via=cloudimage&hashtags=images,cloudimage,responsive_images,lazy_loading,web_acceleration,image_optimization,image_CDN,image_CDNwebp,jpeg_xr,jpg_optimization,image_resizing_and_CDN,cropresize">
+                 href="https://twitter.com/intent/tweet?text=Responsive%20images,%20now%20easier%20than%20ever&url=https://scaleflex.github.io/react-cloudimage-responsive-plain/&via=cloudimage&hashtags=images,cloudimage,responsive_images,lazy_loading,web_acceleration,image_optimization,image_CDN,image_CDNwebp,jpeg_xr,jpg_optimization,image_resizing_and_CDN,cropresize">
                 <i> </i>
                 <span>Tweet</span>
               </a>
@@ -59,7 +59,7 @@ class App extends Component {
             <div className="actions-wrapper">
               <a
                 id="view-github-btn"
-                href="https://github.com/scaleflex/react-cloudimage-responsive"
+                href="https://github.com/scaleflex/react-cloudimage-responsive-plain"
                 className="btn btn-primary"
                 target="_blank"
               >View on GitHub</a>
@@ -73,7 +73,7 @@ class App extends Component {
             </div>
           </div>
 
-          <a href="https://github.com/scaleflex/react-cloudimage-responsive" target="_blank">
+          <a href="https://github.com/scaleflex/react-cloudimage-responsive-plain" target="_blank">
             <img
               className="fork-me-on-github"
               src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"
@@ -419,7 +419,7 @@ class App extends Component {
             <div className="action-wrapper first-action">
               <p>Install using npm</p>
               <figure className="highlight">
-                <pre><code className="javascript">npm install --save react-cloudimage-responsive</code></pre>
+                <pre><code className="javascript">npm install --save react-cloudimage-responsive-plain</code></pre>
               </figure>
             </div>
 
@@ -432,7 +432,7 @@ class App extends Component {
                 </p>
                 <SyntaxHighlighter language='jsx' style={darcula}>{`import React from 'react';
 import { render } from 'react-dom';
-import Img, { CloudimageProvider } from 'react-cloudimage-responsive';
+import Img, { CloudimageProvider } from 'react-cloudimage-responsive-plain';
 
 const cloudimageConfig = {
   token: 'demo',
@@ -442,7 +442,7 @@ const cloudimageConfig = {
 const App = () => {
   return (
     <CloudimageProvider config={cloudimageConfig}>
-      <h1>Simple demo of react-cloudimage-responsive</h1>
+      <h1>Simple demo of react-cloudimage-responsive-plain</h1>
       <Img src="img.jpg" alt="Demo image" ratio={1.5}/>
     </CloudimageProvider>
   );
@@ -472,7 +472,7 @@ render(<App />, document.body);`}</SyntaxHighlighter>
               <div className="action-wrapper forth-action">
                 <p>
                   …and you're done!{' '}
-                  <a href="https://github.com/scaleflex/react-cloudimage-responsive#table-of-contents"
+                  <a href="https://github.com/scaleflex/react-cloudimage-responsive-plain#table-of-contents"
                      target="_blank">{' '}
                     Visit the full documentation here.
                   </a>
@@ -525,12 +525,12 @@ render(<App />, document.body);`}</SyntaxHighlighter>
                 </div>
                 <div className="footer-menu col-sm-3">
                   <ul>
-                    <li><a href="https://github.com/scaleflex/react-cloudimage-responsive" target="_blank">View
+                    <li><a href="https://github.com/scaleflex/react-cloudimage-responsive-plain" target="_blank">View
                       GitHub</a></li>
-                    <li><a href="https://github.com/scaleflex/react-cloudimage-responsive/issues" target="_blank">Current
+                    <li><a href="https://github.com/scaleflex/react-cloudimage-responsive-plain/issues" target="_blank">Current
                       Issues</a>
                     </li>
-                    <li><a href="https://github.com/scaleflex/react-cloudimage-responsive#table-of-contents"
+                    <li><a href="https://github.com/scaleflex/react-cloudimage-responsive-plain#table-of-contents"
                            target="_blank">Documentation</a>
                     </li>
                   </ul>
