@@ -17,9 +17,9 @@
    React Cloudimage Responsive | Cloudimage v7
 </h1>
 
-<h3 align="center">
-   (plain version)
-</h3>
+<h4 align="center">
+   (plain)
+</h4>
 
 <p align="center">
 	<strong>

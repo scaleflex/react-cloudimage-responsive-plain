@@ -28,6 +28,7 @@ class App extends Component {
               href="https://scaleflex.github.io/react-cloudimage-responsive-plain/">
               React Cloudimage Responsive
             </a>
+            <p>(Plain version)</p>
             <div className="reference-buttons">
               <a className="github-button" target="_blank"
                  href="https://github.com/Scaleflex/react-cloudimage-responsive-plain/subscription" data-icon="octicon-eye"
@@ -51,10 +52,8 @@ class App extends Component {
               images. <strong>Upload</strong> one
               high quality original image and the plugin will <strong>resize, compress and accelerate</strong> images
               across
-              the World in your site for all devices. The plugin supports <strong>lazy load</strong> with <strong>fancy
-              animation</strong> on image load.
+              the World in your site for all devices. The plugin supports <strong>lazy load</strong>.
             </h2>
-
 
             <div className="actions-wrapper">
               <a
@@ -104,7 +103,6 @@ class App extends Component {
               <li>Efficiently <strong>lazy load images</strong> to speed initial page load and save bandwidth</li>
               <li>Use the low quality image with "blur-up" technique to <strong>show a preview</strong> of the image
                 <strong> while it loads</strong></li>
-              <li><strong>Hold the image position</strong> so your page doesn't jump while images load</li>
             </ul>
 
           </section>
