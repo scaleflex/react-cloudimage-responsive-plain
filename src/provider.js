@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { debounce } from 'throttle-debounce';
+import { CONSTANTS, processParams } from 'cloudimage-responsive-utils';
 
 
 export const CloudimageContext = React.createContext({ config: {} });
@@ -13,21 +14,21 @@ class CloudimageProvider extends Component {
       token = '',
       domain = 'cloudimg.io',
       lazyLoading = true,
-      imgLoadingAnimation = true,
-      lazyLoadOffset = 100,
+      lazyLoadOffset = 100, // TODO: add to readme
       baseUrl, // to support old name
       baseURL,
       presets,
       params = 'org_if_sml=1',
       exactSize = false,
-      doNotReplaceURL = false
+      doNotReplaceURL = false,
+      limitFactor = 100,
+      devicePixelRatioList, // TODO: add to readme
     } = config;
 
     this.state = {
       token,
       domain,
       lazyLoading,
-      imgLoadingAnimation,
       lazyLoadOffset,
       baseURL: baseUrl || baseURL,
       exactSize,
@@ -39,10 +40,12 @@ class CloudimageProvider extends Component {
           lg: '(min-width: 992px)',  // 992 - 1199   SMALL_LAPTOP_SCREEN
           xl: '(min-width: 1200px)'  // from 1200    USUALSCREEN
         },
-      params,
+      params: processParams(params),
       innerWidth: typeof window !== 'undefined' ? window.innerWidth : null,
       previewQualityFactor: 10,
-      doNotReplaceURL
+      doNotReplaceURL,
+      devicePixelRatioList: devicePixelRatioList || CONSTANTS.DEVICE_PIXEL_RATIO_LIST,
+      limitFactor
     };
 
     if (typeof window !== 'undefined') {

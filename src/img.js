@@ -52,7 +52,7 @@ class Img extends Component {
     const { config = {}, src } = this.props;
     const { baseURL, lazyLoading: configLazyLoadingValue } = config;
     const { lazyLoading = configLazyLoadingValue } = this.props;
-    const { cloudimgURL, height, loaded, processed } = this.state;
+    const { cloudimgURL, cloudimgSRCSET, height, loaded, processed } = this.state;
 
     if (this.server) return <img src={baseURL + src}/>;
     if (!processed) return <div/>;
@@ -65,6 +65,7 @@ class Img extends Component {
       <img
         className={`${className} cloudimage-image ${loaded ? 'loaded' : 'loading'}`.trim()}
         src={cloudimgURL}
+        srcSet={cloudimgSRCSET.map(({ dpr, url }) => `${url} ${dpr}x`).join(', ')}
         alt={alt}
         onLoad={this.onImgLoad}
         {...otherProps}
