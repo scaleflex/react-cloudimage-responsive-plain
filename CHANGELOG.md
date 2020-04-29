@@ -26,6 +26,11 @@ Types of changes:
 
 -------------
 
+## 1.4.0 - 2020-04-29
+
+### Added
+- missing properties in the documentation (README), fix some mistakes
+
 ## 1.2.0 - 2020-04-22
 
 ### Changed

@@ -1,4 +1,4 @@
-[![Release](https://img.shields.io/badge/release-v1.2.0-blue.svg)](https://github.com/scaleflex/react-cloudimage-responsive/releases)
+[![Release](https://img.shields.io/badge/release-v1.4.0-blue.svg)](https://github.com/scaleflex/react-cloudimage-responsive/releases)
 [![Free plan](https://img.shields.io/badge/price-includes%20free%20plan-green.svg)](https://www.cloudimage.io/en/home#b38181a6-b9c8-4015-9742-7b1a1ad382d5)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](#contributing)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -183,6 +183,16 @@ If set to **true** the plugin will only add query params to the given source of 
 Only images close to the client's viewport will be loaded, hence accelerating the page loading time. The plugin uses
 [react-lazyload](https://github.com/twobin/react-lazyload) library to achieve it.
 
+### lazyLoadOffset
+
+######  Type: **Number/Array(Number)** | Default: **100**
+
+Say if you want to preload a component even if it's 100px below the viewport (user have to scroll 100px more to see this component), you can set offset props to 100. On the other hand, if you want to delay loading a component even if it's top edge has already appeared at viewport, set offset to negative number.
+
+Library supports horizontal lazy load out of the box. So when you provide this prop with number like 100 it will automatically set left edge offset to 100 and top edge to 100;
+
+If you provide this prop with array like [100, 200], it will set left edge offset to 100 and top offset to 200.
+
 ### params
 
 ###### Type: **String** | Default: **'org_if_sml=1'** | _optional_
@@ -229,6 +239,23 @@ const cloudimageConfig = {
 
 Breakpoints shortcuts to use in image size property, can be overwridden.
 
+### limitFactor
+
+###### Type: **Number** | Default: **100** | _optional_
+
+Rounds up size of an image to nearest limitFactor value.
+
+For example
+* for an image with width **358px** and limitFactor equals **100** the plugin will round up to 400px
+* for an image with width **358px** and limitFactor equals **5** the plugin will round up to 360px
+
+
+### devicePixelRatioList
+
+###### Type: **[Number,...]** | Default: **[1, 1.5, 2, 3, 4]** | _optional_
+
+List of supported device pixel ratios. If there is no need to support retina devices, you should set empty array `devicePixelRatioList: []`
+
 ## <a name="image_properties"></a> Image properties
 
 ### src
@@ -237,6 +264,41 @@ Breakpoints shortcuts to use in image size property, can be overwridden.
 
 Original image hosted on your web server. You can use absolute path or
 relative to baseURL in your config.
+
+### width
+
+###### Type: **String** (e.g. 300px, 20vw) | Default: **undefined**
+
+If it's set the plugin will use width as fixed value and change only according device pixel ratio.
+
+### height
+
+###### Type: **String** (e.g. 300px, 20vh) | Default: **undefined**
+
+If it's set the plugin will use height as fixed value and change only according device pixel ratio.
+
+### params
+
+###### Type: **String** | Default: **undefined** | _optional_
+
+You can apply any Cloudimage operations/ filters to your image, e.g. brightness, contrast, rotation...
+Multiple params can be applied, separated by "```&```" e.g. **wat_scale=35&wat_gravity=northeast&wat_pad=10&grey=1**
+
+```javascript
+params="gray=1&bright=10"
+```
+
+#### alternative syntax: type: **Object**
+
+```javascript
+params={{
+    bright: 10,
+    grey: 1,
+    ...
+}}
+```
+
+[Full cloudimage v7 documentation here.](https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/introduction)
 
 ### sizes
 
@@ -248,12 +310,12 @@ relative to baseURL in your config.
 <Img
   src="dino-reichmuth-1.jpg"
   sizes={{
-      xs: { w: 200, h: 100 },
-      sm: { w: 400, h: 200 },
-      '(min-width: 620px)': { w: 200, h: 60 },
-      md: { w: 250, h: 350 },
-      lg: { w: 350, h: 300 },
-      xl: { w: 400, h: 250 }
+      '(max-width: 575px)': { w: 400, h: 150 },
+      '(min-width): 576px)': { r: 1 },
+      '(min-width: 620px)': { h: 560 },
+      '(min-width: 768px)': { w: '50vw' },
+      '(min-width: 992px)': { w: '55vw', h: 300 },
+      '(min-width: 1200px)': { w: 1200 }
  }}/>
 ```
 
@@ -267,6 +329,12 @@ You can drop some breakpoints, for example:
       '(min-width: 620px)': { w: 200, h: 60 }
  }}/>
 ```
+
+##### new experimental syntax
+
+md: { w: '40vw', h: 350 } or md: { w: 250, h: '20vh' }
+
+adds possibility to use fixed height or width and change dynamically other dimension
 
 **NOTE:** if size is not set, the plugin uses a special algorithm to
 detect the width of image container and set the image size accordingly. This is the recommended way of using the Cloudimage Responsive plugin.
