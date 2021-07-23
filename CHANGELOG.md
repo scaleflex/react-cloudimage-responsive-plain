@@ -25,7 +25,9 @@ Types of changes:
 - ...
 
 -------------
-
+## 1.6.0 - 2021-07-23
+### Added
+- new property: **customDomain**
 ## 1.5.0 - 2021-07-19
 
 ### Deprecated
