@@ -11,6 +11,7 @@ import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 const cloudimageConfig = {
   token: 'demo',
   baseURL: 'https://cloudimage.public.airstore.io/demo/',
+  apiVersion: 'v7',
   params: 'ci_info=1&org_if_sml=1',
   lazyLoading: true,
   limitFactor: 10
