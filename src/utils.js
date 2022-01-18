@@ -1,5 +1,5 @@
 export const getFilteredProps = props => {
-  const { config = {}, alt = '', className = '', src, sizes, width, height, ratio, params, ...otherProps } = props;
+  const { config = {}, alt = '', className = '', src, sizes, width, height, ratio, params, lazyLoading,...otherProps } = props;
 
   return {
     alt,
