@@ -49,7 +49,7 @@ class BackgroundImg extends Component {
     
     const { height, processed, cloudimgURL } = this.state;
     const {
-      className, config, style, lazyLoadConfig, lazyLoading = config.lazyLoading, children, ...otherProps
+      className, config, style, lazyLoadConfig, lazyLoading = config.lazyLoading, children, doNotReplaceURL, ...otherProps
     } = getFilteredBgProps(this.props);
 
     if (!processed) return <div>{children}</div>;
