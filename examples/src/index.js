@@ -10,7 +10,7 @@ import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const cloudimageConfig = {
   token: 'demo',
-  baseURL: 'https://cloudimage.public.airstore.io/demo/',
+  baseURL: 'https://cdn.scaleflex.it/',
   apiVersion: 'v7',
   params: 'ci_info=1&org_if_sml=1',
   lazyLoading: true,
@@ -281,7 +281,7 @@ class App extends Component {
                     <ContainerBox/>
                     <Img src={image.src}/>
                     original: <i>{image.original_size}</i> <a
-                    href={`https://cloudimage.public.airstore.io/demo/${image.src}`}
+                    href={`https://cdn.scaleflex.it/demo/${image.src}`}
                     target="_blank">link</a><br/>
                   </div>
                 </div>
@@ -303,7 +303,7 @@ class App extends Component {
                 />
                 <small>
                   original: <i>{images[18].original_size}</i> <a
-                  href={`https://cloudimage.public.airstore.io/demo/${images[18].src}`} target="_blank">link</a><br/>
+                  href={`hhttps://cdn.scaleflex.it/demo/${images[18].src}`} target="_blank">link</a><br/>
                 </small>
               </div>
               <div className="col-md-6 col-lg-5 desc-wrapper-with-media-query">
@@ -474,13 +474,13 @@ import Img, { CloudimageProvider } from 'react-cloudimage-responsive-plain';
 
 const cloudimageConfig = {
   token: 'demo',
-  baseURL: 'https://jolipage.airstore.io/'
+  baseURL: 'https://cdn.scaleflex.it/demo/'
 };
 
 const cloudimageConfigWithCustomCNAMEDomain = {
   token: 'demo',
-  baseURL: 'https://jolipage.airstore.io/',
-  customDomain: 'images.airstore.io'
+  baseURL: 'https://cdn.scaleflex.it/demo/',
+  customDomain: 'cloudimage.io'
 };
 
 
