@@ -1,85 +1,108 @@
-import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import LazyLoad from 'react-lazyload';
 import { isServer, processReactNode } from 'cloudimage-responsive-utils';
 import { getFilteredProps } from './utils.js';
-import LazyLoad from 'react-lazyload';
 import { BASE_64_PLACEHOLDER } from 'cloudimage-responsive-utils/dist/constants';
+import usePrevious from './Hooks/usePrevious';
 
 
-class Img extends Component {
-  constructor(props) {
-    super(props);
+function Img(props) {
+  const { config, src } = props;
+  const { lazyLoading: configLazyLoadingValue, lazyLoadOffset, innerWidth, delay } = config;
+  const { lazyLoading = configLazyLoadingValue } = props;
 
-    this.server = isServer();
-    this.state = {
-      cloudimgURL: '',
-      loaded: false,
-      processed: false
-    };
+  const [loaded, setLoaded] = useState(false);
+  const [data, setData] = useState({});
+
+  const imgNode = useRef();
+
+  const previousProps = usePrevious({ innerWidth: config.innerWidth, src });
+
+  const server = useMemo(() => isServer(), []);
+
+  const {
+    cloudimgURL,
+    cloudimgSRCSET,
+    height,
+  } = data;
+
+  const {
+    alt,
+    className,
+    lazyLoadConfig,
+    preserveSize,
+    imgNodeWidth,
+    imgNodeHeight,
+    ...otherProps
+  } = getFilteredProps(props);
+
+  const getCloudimgSRCSET = () => cloudimgSRCSET
+    ?.map(({ dpr, url }) => `${url} ${dpr}x`).join(', ');
+
+  const picClassName = `${className} cloudimage-image ${loaded ? 'loaded' : 'loading'}`.trim();
+
+  const processImg = (update, windowScreenBecomesBigger) => {
+    const imgData = processReactNode(
+      props,
+      imgNode.current,
+      update,
+      windowScreenBecomesBigger);
+
+    if (imgData) setData(imgData);
   }
 
-  componentDidMount() {
-    if (this.server) return;
+  const onImgLoad = () => {
+    setLoaded(true);
+  };
 
-    this.processImg();
-  }
+  useEffect(() => {
+    if(server) return;
 
-  componentDidUpdate(prevProps) {
-    if (this.server) return;
+    if (imgNode.current) processImg();
+  }, []);
 
-    const { config: { innerWidth }, src } = this.props;
+  useEffect(() => {
+    if(!previousProps) return;
 
-    if (prevProps.config.innerWidth !== innerWidth) {
-      this.processImg(true, innerWidth > prevProps.config.innerWidth);
+    if (previousProps.innerWidth !== innerWidth) {
+        processImg(
+          true,
+          innerWidth > previousProps.innerWidth,
+        );
     }
 
-    if (src !== prevProps.src) {
-      this.processImg();
+    if (src !== previousProps.src) {
+        processImg(true, false);
     }
-  }
 
-  processImg = (update, windowScreenBecomesBigger) => {
-    const imgNode = findDOMNode(this);
-    const data = processReactNode(this.props, imgNode, update, windowScreenBecomesBigger, false);
+  }, [innerWidth, src]);
 
-    this.setState(data);
-  }
+  const picture = (
+    <img
+      className={picClassName}
+      src={cloudimgURL}
+      {...(cloudimgSRCSET && !server && {
+        srcSet: getCloudimgSRCSET(),
+      })}
+      alt={alt}
+      ref={imgNode}
+      onLoad={onImgLoad}
+      {...otherProps}
+    />
+  );
 
-  onImgLoad = () => {
-    this.setState({ loaded: true });
-  }
-
-  render() {
-    const { config = {} } = this.props;
-    const { lazyLoading: configLazyLoadingValue } = config;
-    const { lazyLoading = configLazyLoadingValue } = this.props;
-    const { cloudimgURL, cloudimgSRCSET, height, loaded, processed } = this.state;
-
-    if (this.server) return <img alt={this.props.alt} src={BASE_64_PLACEHOLDER}/>;
-    if (!processed) return <div/>;
-
-    const {
-      alt, className, lazyLoadConfig, preserveSize, imgNodeWidth, imgNodeHeight, doNotReplaceURL, ...otherProps
-    } = getFilteredProps(this.props);
-
-    const picture = (
-      <img
-        className={`${className} cloudimage-image ${loaded ? 'loaded' : 'loading'}`.trim()}
-        src={cloudimgURL}
-        srcSet={cloudimgSRCSET.map(({ dpr, url }) => `${url} ${dpr}x`).join(', ')}
-        alt={alt}
-        onLoad={this.onImgLoad}
-        {...otherProps}
-      />
-    );
-
-    return lazyLoading ? (
-      <LazyLoad height={height} offset={config.lazyLoadOffset} {...lazyLoadConfig}>
-        {picture}
-      </LazyLoad>
-    ) : picture;
-  }
-}
-
+  if (server)
+   return <img alt={alt} src={BASE_64_PLACEHOLDER}/>;
+  
+    return false ? (
+    <LazyLoad 
+      height={height}
+      offset={lazyLoadOffset}
+      {...lazyLoadConfig}
+    >
+      {picture}
+    </LazyLoad>
+  ) : picture;
+};
 
 export default Img;
