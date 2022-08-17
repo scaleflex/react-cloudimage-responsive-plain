@@ -121,14 +121,7 @@ function Img(props) {
 
   ) : (
     <div ref={imgNode}>
-      <LazyLoad
-        height={height}
-        offset={lazyLoadOffset}
-        {...lazyLoadConfig}
-      >
       {picture}
-      </LazyLoad>
-
     </div>
   );
 };
