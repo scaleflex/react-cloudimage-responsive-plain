@@ -5,7 +5,7 @@ import { getFilteredBgProps } from './utils.js';
 import BackgroundInner from './background-inner.js';
 
 
-function BackgroundImg(props) { 
+function BackgroundImg(props) {
   const { config = {}, children: defualtChildren } = props;
 
   const [data, setData] = useState({});
@@ -40,27 +40,25 @@ function BackgroundImg(props) {
     ...otherProps
   } = getFilteredBgProps(props);
 
-  useEffect(()=> {
-    if (server) return;
+  useEffect(() => {
+    if (server || !bgNode.current) return;
 
-    if(bgNode.current){
-      processBg();
-    } 
+    processBg();
   }, []);
 
   if (server) {
-    return(
+    return (
       <div>{defualtChildren}</div>
     );
   }
 
-  const Container = <BackgroundInner innerRef={innerRef} {...{ cloudimgURL, className, style, children, otherProps, config }}/>;
+  const Container = <BackgroundInner innerRef={innerRef} {...{ cloudimgURL, className, style, children, otherProps, config }} />;
 
-    return false ? (
-      <LazyLoad height={height} offset={config.lazyLoadOffset} {...lazyLoadConfig}>
-        {Container}
-      </LazyLoad>
-    ) : Container;
+  return false ? (
+    <LazyLoad height={height} offset={config.lazyLoadOffset} {...lazyLoadConfig}>
+      {Container}
+    </LazyLoad>
+  ) : Container;
 
 }
 

@@ -8,8 +8,14 @@ import CloudimageProvider, { CloudimageContext } from './provider';
 const Img = forwardRef((props, ref) => {
   const cloudImageContext = useContext(CloudimageContext);
 
+  const callbackRef = useCallback((node) => {
+    if (node && ref) {
+      ref = node.current;
+    }
+  }, []);
+
   return (
-    <ImgComponent {...props} config={cloudImageContext.cloudImageConfig} />
+    <ImgComponent innerRef={callbackRef} {...props} config={cloudImageContext.cloudImageConfig} />
   );
 });
 

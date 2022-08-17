@@ -8,6 +8,7 @@ function BackgroundInner(props) {
     children,
     innerRef,
     config,
+    onImgLoad,
     ...otherProps
   } = props;
 
@@ -15,14 +16,18 @@ function BackgroundInner(props) {
 
   const { delay } = config;
 
-  const onImgLoad = () => {
+  const _onImgLoad = (event) => {
     setLoaded(true);
+
+    if (typeof onImgLoad === 'function') {
+      onImgLoad(event);
+    }
   }
 
   const preLoadImg = (cloudimgURL) => {
     const img = new Image();
 
-    img.onload = onImgLoad;
+    img.onload = _onImgLoad;
     img.src = cloudimgURL;
   };
 
@@ -30,7 +35,7 @@ function BackgroundInner(props) {
     className,
     'cloudimage-background',
     loaded ? 'loaded' : 'loading',
-  ].join(' ').trim()
+  ].join(' ').trim();
 
   useEffect(() => {
     if (typeof delay !== 'undefined') {
