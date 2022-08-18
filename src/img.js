@@ -68,7 +68,13 @@ function Img(props) {
 
     innerRef.current = imgNode.current;
 
-    processImg();
+    if (typeof delay !== 'undefined') {
+      setTimeout(() => {
+        processImg();
+      }, delay);
+    } else {
+      processImg();
+    }
   }, []);
 
   useEffect(() => {
@@ -90,40 +96,31 @@ function Img(props) {
   const pictureClassName = `${className} cloudimage-image ${loaded ? 'loaded' : 'loading'}`.trim();
 
   const picture = (
-    <div ref={imgNode}>
-      <img
-        className={pictureClassName}
-        src={cloudimgURL}
-        {...(cloudimgSRCSET && !server && {
-          srcSet: getCloudimgSRCSET(),
-        })}
-        alt={alt}
-        ref={innerRef}
-        onLoad={_onImgLoad}
-        {...otherProps}
-      />
-    </div>
+    <img
+      className={pictureClassName}
+      src={cloudimgURL}
+      {...(cloudimgSRCSET && !server && {
+        srcSet: getCloudimgSRCSET(),
+      })}
+      alt={alt}
+      ref={imgNode}
+      onLoad={onImgLoad}
+      {...otherProps}
+    />
   );
 
   if (server)
     return <img alt={alt} src={BASE_64_PLACEHOLDER} />;
 
-  return false && !server ? (
-    <div ref={imgNode}>
-      <LazyLoad
-        height={height}
-        offset={lazyLoadOffset}
-        {...lazyLoadConfig}
-      >
-        {picture}
-      </LazyLoad>
-    </div>
-
-  ) : (
-    <div ref={imgNode}>
+  return false ? (
+    <LazyLoad
+      height={height}
+      offset={lazyLoadOffset}
+      {...lazyLoadConfig}
+    >
       {picture}
-    </div>
-  );
+    </LazyLoad>
+  ) : picture
 };
 
 export default Img;
