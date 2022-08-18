@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useContext } from 'react';
+import { forwardRef, useCallback, useContext } from 'react';
 
 import BackgroundImgComponent from './background';
 import CloudimageProvider, { CloudimageContext } from './provider';
