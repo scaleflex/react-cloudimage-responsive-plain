@@ -22,7 +22,7 @@ function BackgroundImg(props) {
   const processBg = (update, windowScreenBecomesBigger) => {
     const bgData = processReactNode(
       props,
-      bgNode.current,
+      bgNode.current.ref || bgNode.current,
       update,
       windowScreenBecomesBigger,
     );
@@ -55,11 +55,11 @@ function BackgroundImg(props) {
   };
 
   useEffect(() => {
-    if (server || !bgNode.current) return;
+    if (server || !(bgNode.current || bgNode.current?.ref)) return;
 
     processBg();
 
-    innerRef.current = bgNode.current;
+    innerRef.current = bgNode.current || bgNode.current.ref;
   }, []);
 
   if (server) {
@@ -68,8 +68,13 @@ function BackgroundImg(props) {
     );
   }
 
-  return false ? (
-    <LazyLoad height={height} offset={config.lazyLoadOffset} {...lazyLoadConfig}>
+  return lazyLoading ? (
+    <LazyLoad
+      height={height}
+      offset={config.lazyLoadOffset}
+      ref={bgNode}
+      {...lazyLoadConfig}
+    >
       <BackgroundInner _ref={bgNode} {...containerProps} />
     </LazyLoad>
   ) : <BackgroundInner _ref={bgNode} {...containerProps} />;

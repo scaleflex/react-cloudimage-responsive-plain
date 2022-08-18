@@ -2,6 +2,7 @@ import {
   useEffect, useMemo, useRef, useState,
 } from 'react';
 import LazyLoad from 'react-lazyload';
+
 import { isServer, processReactNode } from 'cloudimage-responsive-utils';
 import { BASE_64_PLACEHOLDER } from 'cloudimage-responsive-utils/dist/constants';
 import { getFilteredProps } from './utils';
@@ -12,10 +13,10 @@ function Img(props) {
   const { config, src } = props;
 
   const {
-    lazyLoading: configLazyLoadingValue, lazyLoadOffset, innerWidth, delay,
+    lazyLoading: _lazyLoading, lazyLoadOffset, innerWidth, delay,
   } = config;
 
-  const { lazyLoading = configLazyLoadingValue } = props;
+  const { lazyLoading = _lazyLoading } = props;
 
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState({});
@@ -49,7 +50,7 @@ function Img(props) {
   const processImg = (update, windowScreenBecomesBigger) => {
     const imgData = processReactNode(
       props,
-      imgNode.current,
+      imgNode.current.ref || imgNode.current,
       update,
       windowScreenBecomesBigger,
     );
@@ -68,9 +69,7 @@ function Img(props) {
   };
 
   useEffect(() => {
-    if (server || !imgNode.current) return;
-
-    innerRef.current = imgNode.current;
+    if (server || !(imgNode.current || imgNode.current?.ref)) return;
 
     if (typeof delay !== 'undefined') {
       setTimeout(() => {
@@ -79,6 +78,8 @@ function Img(props) {
     } else {
       processImg();
     }
+
+    innerRef.current = imgNode.current || imgNode.current.ref;
   }, []);
 
   useEffect(() => {
@@ -114,9 +115,10 @@ function Img(props) {
 
   if (server) { return <img alt={alt} src={BASE_64_PLACEHOLDER} />; }
 
-  return false ? (
+  return lazyLoading ? (
     <LazyLoad
       height={height}
+      ref={imgNode}
       offset={lazyLoadOffset}
       {...lazyLoadConfig}
     >

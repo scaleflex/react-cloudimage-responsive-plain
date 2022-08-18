@@ -41,6 +41,7 @@
   "dependencies": {
     "cloudimage-responsive-utils": "^2.5.1",
     "prop-types": "15.8.1",
+    "core-js": "^3.15.2",
     "react-lazyload": "^3.2.0",
     "throttle-debounce": "^3.0.1"
   },
@@ -60,7 +61,6 @@
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.0",
-    "core-js": "^3.15.2",
     "css-loader": "^2.0.0",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
