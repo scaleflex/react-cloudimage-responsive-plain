@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useContext } from 'react';
+import { forwardRef, useCallback, useContext } from 'react';
 import ImgComponent from '../img';
 import BackgroundImgComponent from '../background';
 import CloudimageProvider, { CloudimageContext } from '../provider';
@@ -15,7 +15,7 @@ const Img = forwardRef((props, ref) => {
   }, []);
 
   return (
-    <ImgComponent innerref={ref} {...props} config={cloudImageContext.cloudImageConfig} />
+    <ImgComponent innerref={callbackRef} {...props} config={cloudImageContext.cloudImageConfig} />
   );
 });
 
@@ -23,13 +23,13 @@ const BackgroundImg = forwardRef((props, ref) => {
   const cloudImageContext = useContext(CloudimageContext);
 
   const callBackRef = useCallback((node) => {
-    if(node && ref) {
+    if (node && ref) {
       ref.current = node;
     }
   }, []);
 
   return (
-    <BackgroundImgComponent innerRef={callBackRef} {...props} config={cloudImageContext.config } />
+    <BackgroundImgComponent innerRef={callBackRef} {...props} config={cloudImageContext.config} />
   );
 });
 

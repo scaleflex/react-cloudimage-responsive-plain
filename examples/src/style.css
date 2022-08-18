@@ -295,6 +295,7 @@ body, html {
   left: -15px;
   top: -15px;
   text-align: center;
+  backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   z-index: 100;
 }
@@ -382,6 +383,7 @@ footer .footer-menu ul li {
   height: 20px;
   padding: 0 5px;
   line-height: 18px;
+  filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFAFBFC', endColorstr='#FFE4EBF0')";
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFAFBFC', endColorstr='#FFE4EBF0')";
   display: inline-block;
   vertical-align: bottom;

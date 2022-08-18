@@ -1,8 +1,11 @@
-import React, { createContext, useEffect, useMemo, useState } from 'react';
+import {
+  createContext, useEffect, useMemo, useState,
+} from 'react';
 import { debounce } from 'throttle-debounce';
 import { CONSTANTS, processParams } from 'cloudimage-responsive-utils';
 
-const CloudimageContext = createContext({ cloudImageConfig: {} })
+
+const CloudimageContext = createContext({ cloudImageConfig: {} });
 
 function CloudimageProvider({ config = {}, children } = {}) {
   const {
@@ -33,11 +36,11 @@ function CloudimageProvider({ config = {}, children } = {}) {
     apiVersion,
     exactSize,
     presets: presets || {
-        xs: '(max-width: 575px)',  // to 575       PHONE
-        sm: '(min-width: 576px)',  // 576 - 767    PHABLET
-        md: '(min-width: 768px)',  // 768 - 991    TABLET
-        lg: '(min-width: 992px)',  // 992 - 1199   SMALL_LAPTOP_SCREEN
-        xl: '(min-width: 1200px)'  // from 1200    USUALSCREEN
+      xs: '(max-width: 575px)', // to 575       PHONE
+      sm: '(min-width: 576px)', // 576 - 767    PHABLET
+      md: '(min-width: 768px)', // 768 - 991    TABLET
+      lg: '(min-width: 992px)', // 992 - 1199   SMALL_LAPTOP_SCREEN
+      xl: '(min-width: 1200px)', // from 1200    USUALSCREEN
     },
     params: processParams(params),
     innerWidth: typeof window !== 'undefined' ? window.innerWidth : null,
@@ -45,7 +48,7 @@ function CloudimageProvider({ config = {}, children } = {}) {
     doNotReplaceURL,
     devicePixelRatioList,
     limitFactor,
-    imageSizeAttributes
+    imageSizeAttributes,
   });
 
   const updateDimensions = debounce(100, () => {
@@ -54,7 +57,7 @@ function CloudimageProvider({ config = {}, children } = {}) {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      window.addEventListener("resize", updateDimensions);
+      window.addEventListener('resize', updateDimensions);
     }
 
     return () => {
@@ -63,8 +66,8 @@ function CloudimageProvider({ config = {}, children } = {}) {
   }, []);
 
   return (
-    <CloudimageContext.Provider 
-      value={useMemo(() => ({ cloudImageConfig}), [cloudImageConfig])}
+    <CloudimageContext.Provider
+      value={useMemo(() => ({ cloudImageConfig }), [cloudImageConfig])}
     >
       {children}
     </CloudimageContext.Provider>

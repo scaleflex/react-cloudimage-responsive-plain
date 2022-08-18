@@ -1,15 +1,19 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import {
+  useEffect, useMemo, useRef, useState,
+} from 'react';
 import LazyLoad from 'react-lazyload';
 import { isServer, processReactNode } from 'cloudimage-responsive-utils';
-import { getFilteredProps } from './utils.js';
 import { BASE_64_PLACEHOLDER } from 'cloudimage-responsive-utils/dist/constants';
+import { getFilteredProps } from './utils';
 import usePrevious from './Hooks/usePrevious';
 
 
 function Img(props) {
   const { config, src } = props;
 
-  const { lazyLoading: configLazyLoadingValue, lazyLoadOffset, innerWidth, delay } = config;
+  const {
+    lazyLoading: configLazyLoadingValue, lazyLoadOffset, innerWidth, delay,
+  } = config;
 
   const { lazyLoading = configLazyLoadingValue } = props;
 
@@ -17,10 +21,8 @@ function Img(props) {
   const [data, setData] = useState({});
 
   const imgNode = useRef();
-
-  const previousProps = usePrevious({ innerWidth: config.innerWidth, src });
-
   const server = useMemo(() => isServer(), []);
+  const previousProps = usePrevious({ innerWidth: config.innerWidth, src });
 
   const {
     cloudimgURL,
@@ -35,10 +37,11 @@ function Img(props) {
     preserveSize,
     imgNodeWidth,
     imgNodeHeight,
+    innerRef,
     ...otherProps
   } = getFilteredProps(props);
 
-  const { innerRef, onImgLoad } = otherProps;
+  const { onImgLoad } = otherProps;
 
   const getCloudimgSRCSET = () => cloudimgSRCSET
     ?.map(({ dpr, url }) => `${url} ${dpr}x`).join(', ');
@@ -48,12 +51,13 @@ function Img(props) {
       props,
       imgNode.current,
       update,
-      windowScreenBecomesBigger);
+      windowScreenBecomesBigger,
+    );
 
     if (imgData) {
       setData(imgData);
     }
-  }
+  };
 
   const _onImgLoad = (event) => {
     setLoaded(true);
@@ -90,7 +94,6 @@ function Img(props) {
     if (src !== previousProps.src) {
       processImg();
     }
-
   }, [innerWidth, src]);
 
   const pictureClassName = `${className} cloudimage-image ${loaded ? 'loaded' : 'loading'}`.trim();
@@ -104,13 +107,12 @@ function Img(props) {
       })}
       alt={alt}
       ref={imgNode}
-      onLoad={onImgLoad}
+      onLoad={_onImgLoad}
       {...otherProps}
     />
   );
 
-  if (server)
-    return <img alt={alt} src={BASE_64_PLACEHOLDER} />;
+  if (server) { return <img alt={alt} src={BASE_64_PLACEHOLDER} />; }
 
   return false ? (
     <LazyLoad
@@ -120,7 +122,7 @@ function Img(props) {
     >
       {picture}
     </LazyLoad>
-  ) : picture
-};
+  ) : picture;
+}
 
 export default Img;

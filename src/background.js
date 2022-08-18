@@ -1,18 +1,21 @@
-import React, { useEffect, useMemo, useState, useRef } from 'react';
+import {
+  useEffect, useMemo, useState, useRef,
+} from 'react';
 import LazyLoad from 'react-lazyload';
 import { isServer, processReactNode } from 'cloudimage-responsive-utils';
-import { getFilteredBgProps } from './utils.js';
-import BackgroundInner from './background-inner.js';
+import { getFilteredBgProps } from './utils';
+import BackgroundInner from './background-inner';
 
 
 function BackgroundImg(props) {
-  const { config = {}, children: defualtChildren } = props;
+  const {
+    config = {}, onImgLoad, src, children: defualtChildren,
+  } = props;
 
   const [data, setData] = useState({});
 
   const bgNode = useRef();
-
-  const server = useMemo(() => isServer, []);
+  const server = useMemo(() => isServer(), []);
 
   const { height, cloudimgURL } = data;
 
@@ -21,7 +24,7 @@ function BackgroundImg(props) {
       props,
       bgNode.current,
       update,
-      windowScreenBecomesBigger
+      windowScreenBecomesBigger,
     );
 
     if (bgData) {
@@ -40,10 +43,23 @@ function BackgroundImg(props) {
     ...otherProps
   } = getFilteredBgProps(props);
 
+  const containerProps = {
+    cloudimgURL,
+    className,
+    style,
+    children,
+    config,
+    onImgLoad,
+    src,
+    ...otherProps,
+  };
+
   useEffect(() => {
     if (server || !bgNode.current) return;
 
     processBg();
+
+    innerRef.current = bgNode.current;
   }, []);
 
   if (server) {
@@ -52,14 +68,11 @@ function BackgroundImg(props) {
     );
   }
 
-  const Container = <BackgroundInner innerRef={innerRef} {...{ cloudimgURL, className, style, children, otherProps, config }} />;
-
   return false ? (
     <LazyLoad height={height} offset={config.lazyLoadOffset} {...lazyLoadConfig}>
-      {Container}
+      <BackgroundInner _ref={bgNode} {...containerProps} />
     </LazyLoad>
-  ) : Container;
-
+  ) : <BackgroundInner _ref={bgNode} {...containerProps} />;
 }
 
 export default BackgroundImg;

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+
 
 function BackgroundInner(props) {
   const {
@@ -6,7 +7,7 @@ function BackgroundInner(props) {
     className,
     style,
     children,
-    innerRef,
+    _ref,
     config,
     onImgLoad,
     ...otherProps
@@ -22,9 +23,9 @@ function BackgroundInner(props) {
     if (typeof onImgLoad === 'function') {
       onImgLoad(event);
     }
-  }
+  };
 
-  const preLoadImg = (cloudimgURL) => {
+  const preLoadImg = () => {
     const img = new Image();
 
     img.onload = _onImgLoad;
@@ -40,17 +41,17 @@ function BackgroundInner(props) {
   useEffect(() => {
     if (typeof delay !== 'undefined') {
       setTimeout(() => {
-        preLoadImg(cloudimgURL);
+        preLoadImg();
       }, delay);
     } else {
-      preLoadImg(cloudimgURL);
+      preLoadImg();
     }
   }, []);
 
   return (
     <div
       {...otherProps}
-      ref={innerRef}
+      ref={_ref}
       className={containerClassName}
       style={{ ...style, backgroundImage: `url(${cloudimgURL})` }}
     >

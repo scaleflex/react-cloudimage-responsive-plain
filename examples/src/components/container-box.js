@@ -1,5 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { debounce } from 'throttle-debounce'
+import {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
+import { debounce } from 'throttle-debounce';
 
 
 function ContainerBox({ isHeight }) {
@@ -23,7 +25,6 @@ function ContainerBox({ isHeight }) {
     return () => {
       window.removeEventListener('resize', debounce);
     };
-
   }, []);
 
   return (
@@ -34,7 +35,9 @@ function ContainerBox({ isHeight }) {
       container
       {isHeight ? '' : 'width:'}
       <span>{width}</span>
-      {isHeight ? `x ${height}` : ''} px
+      {isHeight ? `x ${height}` : ''}
+      {' '}
+      px
     </div>
   );
 }

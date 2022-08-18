@@ -1,8 +1,9 @@
-import './polyfills';
 import React, { forwardRef, useCallback, useContext } from 'react';
-import ImgComponent from './img';
+
 import BackgroundImgComponent from './background';
 import CloudimageProvider, { CloudimageContext } from './provider';
+import ImgComponent from './img';
+import './polyfills';
 
 
 const Img = forwardRef((props, ref) => {
@@ -23,13 +24,13 @@ const BackgroundImg = forwardRef((props, ref) => {
   const cloudImageContext = useContext(CloudimageContext);
 
   const callBackRef = useCallback((node) => {
-    if(node && ref) {
+    if (node && ref) {
       ref.current = node;
     }
   }, []);
 
-  return ( 
-    <BackgroundImgComponent innerRef={callBackRef} {...props} config={cloudImageContext.config } />
+  return (
+    <BackgroundImgComponent innerRef={callBackRef} {...props} config={cloudImageContext.cloudImageConfig} />
   );
 });
 
