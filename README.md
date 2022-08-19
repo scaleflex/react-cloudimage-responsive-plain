@@ -38,7 +38,7 @@
 		•
 		<a href="https://scaleflex.github.io/react-cloudimage-responsive-plain/" target="_blank">Demo</a>
 		•
-		<a href="https://codesandbox.io/s/react-cloudimage-responsive-plain-example-clgjj" target="_blank">Code Sandbox</a>
+		<a href="https://codesandbox.io/s/react-cloudimage-responsive-plain-example-84npd1" target="_blank">Code Sandbox</a>
 		•
 		<a href="https://medium.com/@dmitry_82269/responsive-images-in-2019-now-easier-than-ever-b76e5a43c074" target="_blank">Why?</a>
 	</strong>
@@ -178,7 +178,7 @@ render(<App />, document.body);
 <Img src="img.jpg" alt="Demo image"/>
 ```
 
-<a href="https://codesandbox.io/s/react-cloudimage-responsive-plain-example-clgjj"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="edeit in codesandbox"/></a>
+<a href="https://codesandbox.io/s/react-cloudimage-responsive-plain-example-84npd1"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="edeit in codesandbox"/></a>
 
 ### BackgroundImg component:
 
@@ -188,7 +188,7 @@ render(<App />, document.body);
 </BackgroundImg>
 ```
 
-<a href="https://codesandbox.io/s/react-cloudimage-responsive-plain-background-4z247"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="edeit in codesandbox"/></a>
+<a href="https://codesandbox.io/s/react-cloudimage-responsive-plain-background-nptb18"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="edeit in codesandbox"/></a>
 
 ## <a name="configuration"></a> Config
 
