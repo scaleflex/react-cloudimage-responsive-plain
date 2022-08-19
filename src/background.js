@@ -5,6 +5,7 @@ import LazyLoad from 'react-lazyload';
 import { isServer, processReactNode } from 'cloudimage-responsive-utils';
 import { getFilteredBgProps } from './utils';
 import BackgroundInner from './background-inner';
+import usePrevious from './Hooks/usePrevious';
 
 
 function BackgroundImg(props) {
@@ -12,10 +13,13 @@ function BackgroundImg(props) {
     config = {}, onImgLoad, src, children: defualtChildren,
   } = props;
 
+  const { innerWidth } = config;
+
   const [data, setData] = useState({});
 
   const bgNode = useRef();
   const server = useMemo(() => isServer(), []);
+  const previousProps = usePrevious({ innerWidth: config.innerWidth, src });
 
   const { height, cloudimgURL } = data;
 
@@ -61,6 +65,21 @@ function BackgroundImg(props) {
 
     innerRef.current = bgNode.current || bgNode.current.ref;
   }, []);
+
+  useEffect(() => {
+    if (!previousProps) return;
+
+    if (previousProps.innerWidth !== innerWidth) {
+      processBg(
+        true,
+        innerWidth > previousProps.innerWidth,
+      );
+    }
+
+    if (src !== previousProps.src) {
+      processBg();
+    }
+  }, [innerWidth, src]);
 
   if (server) {
     return (

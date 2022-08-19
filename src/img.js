@@ -4,7 +4,6 @@ import {
 import LazyLoad from 'react-lazyload';
 
 import { isServer, processReactNode } from 'cloudimage-responsive-utils';
-import { BASE_64_PLACEHOLDER } from 'cloudimage-responsive-utils/dist/constants';
 import { getFilteredProps } from './utils';
 import usePrevious from './Hooks/usePrevious';
 
@@ -113,9 +112,7 @@ function Img(props) {
     />
   );
 
-  if (server) { return <img alt={alt} src={BASE_64_PLACEHOLDER} />; }
-
-  return lazyLoading ? (
+  return lazyLoading && !server ? (
     <LazyLoad
       height={height}
       ref={imgNode}

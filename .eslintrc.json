@@ -9,6 +9,7 @@
     ],
     "overrides": [
     ],
+    "ignorePatterns": ["webpack-demo.config.js", "**/vendor/*.js"],
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
