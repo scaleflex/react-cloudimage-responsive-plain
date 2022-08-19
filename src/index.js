@@ -16,7 +16,11 @@ const Img = forwardRef((props, ref) => {
   }, []);
 
   return (
-    <ImgComponent innerRef={callbackRef} {...props} config={cloudImageContext.cloudImageConfig} />
+    <ImgComponent
+      innerRef={callbackRef}
+      {...props}
+      config={cloudImageContext.cloudImageConfig}
+    />
   );
 });
 
@@ -30,7 +34,11 @@ const BackgroundImg = forwardRef((props, ref) => {
   }, []);
 
   return (
-    <BackgroundImgComponent innerRef={callBackRef} {...props} config={cloudImageContext.cloudImageConfig} />
+    <BackgroundImgComponent
+      innerRef={callBackRef}
+      {...props}
+      config={cloudImageContext.cloudImageConfig}
+    />
   );
 });
 

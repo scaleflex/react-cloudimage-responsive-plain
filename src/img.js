@@ -3,18 +3,17 @@ import {
 } from 'react';
 import LazyLoad from 'react-lazyload';
 
-import { isServer, processReactNode } from 'cloudimage-responsive-utils';
+import { generateAlt, isServer, processReactNode } from 'cloudimage-responsive-utils';
 import { getFilteredProps } from './utils';
 import usePrevious from './Hooks/usePrevious';
 
 
 function Img(props) {
   const { config, src } = props;
-
   const {
-    lazyLoading: _lazyLoading, lazyLoadOffset, innerWidth, delay,
+    lazyLoading: _lazyLoading,
+    lazyLoadOffset, innerWidth, delay,
   } = config;
-
   const { lazyLoading = _lazyLoading } = props;
 
   const [loaded, setLoaded] = useState(false);
@@ -37,11 +36,16 @@ function Img(props) {
     preserveSize,
     imgNodeWidth,
     imgNodeHeight,
-    innerRef,
     ...otherProps
   } = getFilteredProps(props);
 
-  const { onImgLoad } = otherProps;
+  const {
+    innerRef,
+    onImgLoad,
+    disableAnimation,
+    doNotReplaceURL,
+    ...filteredProps
+  } = otherProps;
 
   const getCloudimgSRCSET = () => cloudimgSRCSET
     ?.map(({ dpr, url }) => `${url} ${dpr}x`).join(', ');
@@ -97,18 +101,19 @@ function Img(props) {
   }, [innerWidth, src]);
 
   const pictureClassName = `${className} cloudimage-image ${loaded ? 'loaded' : 'loading'}`.trim();
+  const pictureAlt = alt || generateAlt(src);
 
   const picture = (
     <img
       className={pictureClassName}
       src={cloudimgURL}
-      {...(cloudimgSRCSET && !server && {
+      {...(cloudimgSRCSET && {
         srcSet: getCloudimgSRCSET(),
       })}
-      alt={alt}
+      alt={pictureAlt}
       ref={imgNode}
       onLoad={_onImgLoad}
-      {...otherProps}
+      {...filteredProps}
     />
   );
 
