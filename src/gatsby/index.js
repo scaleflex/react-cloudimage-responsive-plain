@@ -1,23 +1,23 @@
-import React from 'react';
+import { useContext } from 'react';
 import ImgComponent from '../img';
 import BackgroundImgComponent from '../background';
 import CloudimageProvider, { CloudimageContext } from '../provider';
 
 
-const Img = (props = {}) => {
+function Img(props) {
+  const cloudImageContext = useContext(CloudimageContext);
+
   return (
-    <CloudimageContext.Consumer>
-      {(context = {}) => <ImgComponent {...props} config={context.config}/>}
-    </CloudimageContext.Consumer>
-  )
+    <ImgComponent {...props} config={cloudImageContext.cloudImageConfig} />
+  );
 }
 
-const BackgroundImg = (props = {}) => {
+function BackgroundImg(props) {
+  const cloudImageContext = useContext(CloudimageContext);
+
   return (
-    <CloudimageContext.Consumer>
-      {(context = {}) => <BackgroundImgComponent {...props} config={context.config }/>}
-    </CloudimageContext.Consumer>
-  )
+    <BackgroundImgComponent {...props} config={cloudImageContext.cloudImageConfig} />
+  );
 }
 
 export default Img;

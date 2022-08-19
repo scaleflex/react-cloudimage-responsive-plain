@@ -1,25 +1,46 @@
-import './polyfills';
-import React from 'react';
-import ImgComponent from './img';
+import { forwardRef, useCallback, useContext } from 'react';
+
 import BackgroundImgComponent from './background';
 import CloudimageProvider, { CloudimageContext } from './provider';
+import ImgComponent from './img';
+import './polyfills';
 
 
-const Img = (props = {}) => {
+const Img = forwardRef((props, ref) => {
+  const cloudImageContext = useContext(CloudimageContext);
+
+  const callbackRef = useCallback((node) => {
+    if (node && ref) {
+      ref = node.current;
+    }
+  }, []);
+
   return (
-    <CloudimageContext.Consumer>
-      {(context = {}) => <ImgComponent {...props} config={context.config}/>}
-    </CloudimageContext.Consumer>
-  )
-}
+    <ImgComponent
+      innerRef={callbackRef}
+      {...props}
+      config={cloudImageContext.cloudImageConfig}
+    />
+  );
+});
 
-const BackgroundImg = (props = {}) => {
+const BackgroundImg = forwardRef((props, ref) => {
+  const cloudImageContext = useContext(CloudimageContext);
+
+  const callBackRef = useCallback((node) => {
+    if (node && ref) {
+      ref.current = node;
+    }
+  }, []);
+
   return (
-    <CloudimageContext.Consumer>
-      {(context = {}) => <BackgroundImgComponent {...props} config={context.config }/>}
-    </CloudimageContext.Consumer>
-  )
-}
+    <BackgroundImgComponent
+      innerRef={callBackRef}
+      {...props}
+      config={cloudImageContext.cloudImageConfig}
+    />
+  );
+});
 
 export default Img;
 

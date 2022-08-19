@@ -1,21 +1,19 @@
-export const getFilteredProps = props => {
-  const { config = {}, alt = '', className = '', src, sizes, width, height, ratio, params, lazyLoading,...otherProps } = props;
+export const getFilteredProps = ({
+  alt = '', className = '', src, sizes, width, height,
+  ratio, params, lazyLoading, ...otherProps
+}) => ({
+  alt,
+  className,
+  imgNodeWidth: width,
+  imgNodeHeight: height,
+  ...otherProps,
+});
 
-  return {
-    alt,
-    className,
-    imgNodeWidth: width,
-    imgNodeHeight: height,
-    ...otherProps
-  }
-};
-
-export const getFilteredBgProps = props => {
-  const { config = {}, alt = '', className = '', src, sizes, width, height, ratio, params, ...otherProps } = props;
-
-  return {
-    config,
-    className,
-    ...otherProps
-  };
-};
+export const getFilteredBgProps = ({
+  config = {}, alt = '', className = '', src, sizes, width, height, ratio, params, ...otherProps
+}) => ({
+  alt,
+  config,
+  className,
+  ...otherProps,
+});
