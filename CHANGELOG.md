@@ -25,9 +25,14 @@ Types of changes:
 - ...
 
 -------------
-## 2.0.0 - 2022-08-19
+## 2.0.1 - 2022-08-19
 ### Fixed
-- Low preview image width
+- Prevent the config to be visible on DOM.
+
+## 2.0.0 - 2022-08-19
+### Changed
+- Support React 18
+- **BREAKING**: the library might not work with React version < 18
 
 ## 1.6.9 - 2022-04-29
 ### Fixed

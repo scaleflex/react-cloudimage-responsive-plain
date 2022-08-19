@@ -44,6 +44,7 @@ function Img(props) {
     onImgLoad,
     disableAnimation,
     doNotReplaceURL,
+    config: _config,
     ...filteredProps
   } = otherProps;
 
@@ -105,6 +106,7 @@ function Img(props) {
 
   const picture = (
     <img
+      {...filteredProps}
       className={pictureClassName}
       src={cloudimgURL}
       {...(cloudimgSRCSET && {
@@ -113,7 +115,6 @@ function Img(props) {
       alt={pictureAlt}
       ref={imgNode}
       onLoad={_onImgLoad}
-      {...filteredProps}
     />
   );
 
