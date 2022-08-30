@@ -120,10 +120,10 @@ In order to use Cloudimage responsive plugins on your single-page application, p
 </details>
 
 ## <a name="compatibility"></a> Compatibility
-| Version | React Version |
+| Version | Vue Version |
 |---------|--------------|
-| >4.0.0   | >=18.0.0 |
-| <=1.6.9   | <=17.x.x |
+| >3.0.0   | >=3.x.x |
+| <=3.0.0   | <=2.x.x |
 
 
 ## <a name="requirements"/> Requirements

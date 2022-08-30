@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+## 3.0.0 - 2022-08-30
+### Changed
+- **BREAKING**: Upgrade to Vue 3
+
 ## 2.0.1 - 2022-08-19
 ### Fixed
 - Prevent the config to be visible on DOM.
