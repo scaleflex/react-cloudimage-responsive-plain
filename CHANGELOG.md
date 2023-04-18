@@ -25,6 +25,10 @@ Types of changes:
 - ...
 
 -------------
+## 2.0.2 - 2023-04-18
+### Fixed
+- Remove CVE vulnerabilities
+
 ## 2.0.1 - 2022-08-19
 ### Fixed
 - Prevent the config to be visible on DOM.
