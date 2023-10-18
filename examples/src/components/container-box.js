@@ -10,10 +10,10 @@ function ContainerBox({ isHeight }) {
 
   const box = useRef();
 
-  const setContainerWidthAndHeight = useCallback(() => {
+  const setContainerWidthAndHeight =() => {
     setWidth(box.current.parentNode.offsetWidth);
     setHeight(box.current.parentNode.offsetHeight);
-  }, [box]);
+  };
 
   useEffect(() => {
     setContainerWidthAndHeight();

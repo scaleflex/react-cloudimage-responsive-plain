@@ -249,7 +249,7 @@ If set to **true** the plugin will only add query params to the given source of 
 ###### Type: **Bool** | Default: **true** | _optional_
 
 Only images close to the client's viewport will be loaded, hence accelerating the page loading time. The plugin uses
-[react-lazyload](https://github.com/twobin/react-lazyload) library to achieve it.
+[react-lazy-load](https://www.npmjs.com/package/react-lazy-load) library to achieve it.
 
 ### lazyLoadOffset
 
@@ -438,7 +438,7 @@ Make it possible to disable lazyLoading for each image.
 
 ###### Type: **Object** | _optional_
 
-The lazyLoad configuration to [LazyLoad](https://github.com/twobin/react-lazyload#props) component. 
+The lazyLoad configuration to [React Lazy Load Component](https://www.npmjs.com/package/react-lazy-load#props) component. 
 
 To see the full cloudimage documentation [click here](https://docs.cloudimage.io/go/cloudimage-documentation)
 

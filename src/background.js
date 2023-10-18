@@ -1,7 +1,7 @@
 import {
   useEffect, useMemo, useState, useRef,
 } from 'react';
-import LazyLoad from 'react-lazyload';
+import LazyLoad from 'react-lazy-load';
 import { isServer, processReactNode } from 'cloudimage-responsive-utils';
 import { getFilteredBgProps } from './utils';
 import BackgroundInner from './background-inner';
@@ -24,9 +24,11 @@ function BackgroundImg(props) {
   const { height, cloudimgURL } = data;
 
   const processBg = (update, windowScreenBecomesBigger) => {
+    if (!bgNode?.current) return;
+
     const bgData = processReactNode(
       props,
-      bgNode.current.ref || bgNode.current,
+      { parentNode: {},...bgNode.current },
       update,
       windowScreenBecomesBigger,
     );

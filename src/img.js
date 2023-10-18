@@ -1,7 +1,7 @@
 import {
   useEffect, useMemo, useRef, useState,
 } from 'react';
-import LazyLoad from 'react-lazyload';
+import LazyLoad from 'react-lazy-load';
 
 import { generateAlt, isServer, processReactNode } from 'cloudimage-responsive-utils';
 import { getFilteredProps } from './utils';
@@ -52,9 +52,11 @@ function Img(props) {
     ?.map(({ dpr, url }) => `${url} ${dpr}x`).join(', ');
 
   const processImg = (update, windowScreenBecomesBigger) => {
+    if (!imgNode?.current) return;
+
     const imgData = processReactNode(
       props,
-      imgNode.current.ref || imgNode.current,
+      { parentNode: {},...imgNode.current },
       update,
       windowScreenBecomesBigger,
     );
@@ -73,7 +75,7 @@ function Img(props) {
   };
 
   useEffect(() => {
-    if (server || !(imgNode.current || imgNode.current?.ref)) return;
+    if (server || !imgNode.current) return;
 
     if (typeof delay !== 'undefined') {
       setTimeout(() => {
